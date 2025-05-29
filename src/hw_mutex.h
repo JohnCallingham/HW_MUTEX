@@ -47,6 +47,11 @@ class HW_MUTEX {
     bool setPinInActive(uint8_t pin); // error is raised if pin is not in the vector.
 
     /**
+     * Sets all pins to the inactive state.
+     */
+    void setAllPinsInActive();
+
+    /**
      * Called from loop().
      * Checks if the timeout has expired and, if so, set the active pin to the active state.
      */

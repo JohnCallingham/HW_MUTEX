@@ -47,6 +47,12 @@ bool HW_MUTEX::setPinInActive(uint8_t pin) {
   return true;
 }
 
+void HW_MUTEX::setAllPinsInActive() {
+  for (auto i: outputPins) {
+    _setPinInActive(i);
+  }
+}
+
 bool HW_MUTEX::_isPinValid(uint8_t pin) {
   //Serial.printf("\nin isPinValid() for %d", pin);
   for (auto i: outputPins) {
