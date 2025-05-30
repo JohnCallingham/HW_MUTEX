@@ -14,15 +14,15 @@
  */
 
  /**
-  * TO DO: poss allow the user to set all pins to inactive.
+  * TO DO: allow a default delay and allow the user to override this from the frog object.
   */
 
 #include <Arduino.h>
 #include <vector>
 
-class HW_MUTEX {
+class HwMutex {
   public:
-    HW_MUTEX();
+    HwMutex();
 
     /**
      * Stores outputPins, sets all pins to outputs and resets all pins to the inactive state.

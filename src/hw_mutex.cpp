@@ -1,11 +1,14 @@
 #include "hw_mutex.h"
 
-HW_MUTEX::HW_MUTEX() {
+HwMutex::HwMutex() {
   // Set the default active setting.
   activeSetting = Active::activeLow;
+
+  // Set the default delay to 100mS.
+  delaymS = 100;
 }
 
-void HW_MUTEX::setOutputPins(std::vector<uint8_t> outputPins) {
+void HwMutex::setOutputPins(std::vector<uint8_t> outputPins) {
   // Store the output pins.
   this->outputPins = outputPins;
 
@@ -16,7 +19,7 @@ void HW_MUTEX::setOutputPins(std::vector<uint8_t> outputPins) {
   }
 }
 
-bool HW_MUTEX::setPinActive(uint8_t pin) {
+bool HwMutex::setPinActive(uint8_t pin) {
   // Check that activePin is in the list of pins.
   if (!_isPinValid(pin)) return false;
 
@@ -38,7 +41,7 @@ bool HW_MUTEX::setPinActive(uint8_t pin) {
   return true;
 }
 
-bool HW_MUTEX::setPinInActive(uint8_t pin) {
+bool HwMutex::setPinInActive(uint8_t pin) {
   // Check that activePin is in the list of pins.
   if (!_isPinValid(pin)) return false;
 
@@ -47,13 +50,13 @@ bool HW_MUTEX::setPinInActive(uint8_t pin) {
   return true;
 }
 
-void HW_MUTEX::setAllPinsInActive() {
+void HwMutex::setAllPinsInActive() {
   for (auto i: outputPins) {
     _setPinInActive(i);
   }
 }
 
-bool HW_MUTEX::_isPinValid(uint8_t pin) {
+bool HwMutex::_isPinValid(uint8_t pin) {
   //Serial.printf("\nin isPinValid() for %d", pin);
   for (auto i: outputPins) {
     //Serial.printf("\nchecking pin %d", i);
@@ -63,7 +66,7 @@ bool HW_MUTEX::_isPinValid(uint8_t pin) {
   return false;
 }
 
-void HW_MUTEX::process() {
+void HwMutex::process() {
   // Check for the timeout expiring.
   if ((delayRunning) && (millis() >= delayExpiryTime)) {
     // The timeout has expired.
@@ -74,7 +77,7 @@ void HW_MUTEX::process() {
   }
 }
 
-void HW_MUTEX::_setPinActive(uint8_t pin) {
+void HwMutex::_setPinActive(uint8_t pin) {
   if (activeSetting == Active::activeHigh) {
     _setPinHigh(pin);
   } else {
@@ -82,7 +85,7 @@ void HW_MUTEX::_setPinActive(uint8_t pin) {
   }
 }
 
-void HW_MUTEX::_setPinInActive(uint8_t pin) {
+void HwMutex::_setPinInActive(uint8_t pin) {
   if (activeSetting == Active::activeHigh) {
     _setPinLow(pin);
   } else {
@@ -90,12 +93,12 @@ void HW_MUTEX::_setPinInActive(uint8_t pin) {
   }
 }
 
-void HW_MUTEX::_setPinHigh(uint8_t pin) {
+void HwMutex::_setPinHigh(uint8_t pin) {
   Serial.printf("\n%d setting pin %d HIGH", millis(), pin);
   digitalWrite(pin, HIGH);
 }
 
-void HW_MUTEX::_setPinLow(uint8_t pin) {
+void HwMutex::_setPinLow(uint8_t pin) {
   Serial.printf("\n%d setting pin %d LOW", millis(), pin);
   digitalWrite(pin, LOW);
 }

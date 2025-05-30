@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "hw_mutex.h"
 
-HW_MUTEX myMutex;
+HwMutex myMutex;
 
 void setup() {
   Serial.begin(115200);
