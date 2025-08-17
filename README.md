@@ -1,11 +1,11 @@
 # HW_MUTEX
 
-This library has been designed to be part of the ESP32_2Servo_2Frog_2TOTI_WiFi program. It is part of a suite of libraries which can be used as part of an OpenLCB/LCC node.
+The file hw_mutex.h contains a single class HwMutex. This class accepts a number of GPIO output pins and ensures that only one of them can be active at a time.
+
+The GPIO outputs can be configured to all be active high or all be active low.
+
+When one of the output pins is set to be active all of the output pins are set to be inactive and a timer is started. When the timer expires the selectted output is made active.
+
+This library is used when switching frogs to ensure that the frog can never be connected to both supply rails at the same time.
 
 This library has been developed using PlatformIO.
-
-It implements a hardware mutex which a number of pins to be configured as outputs. Only one can be active at a time.
-
-The output pins can be configured to be active high or active low.
-
-When a pin is selected to be active, all pins are made inactive and the configurable delay is started. When the delay expires the selected pin is made active.
