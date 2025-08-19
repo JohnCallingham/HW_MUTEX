@@ -59,7 +59,7 @@ class HwMutex {
 
 private:
   std::vector<uint8_t> outputPins;
-  uint8_t currentActivePin; // what to start with??
+  uint8_t currentActivePin = 0; // assumes that there is no pin 0 !!
   enum Active { activeHigh, activeLow };
   Active activeSetting; // Determines whether the outputs are active high or active low.
   unsigned long delaymS; // The delay from all pins going inactive to the one pin going active.
