@@ -23,8 +23,8 @@ bool HwMutex::setPinActive(uint8_t pin) {
   // Check that activePin is in the list of pins.
   if (!_isPinValid(pin)) return false;
 
-  // If this pin is already the active pin, then take no further action.
-  if (pin == currentActivePin) return true;
+  // // If this pin is already the active pin, then take no further action.
+  // if (pin == currentActivePin) return true;
 
   // Reset all pins to inactive.
   for (auto i: outputPins) {
